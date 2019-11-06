@@ -1,5 +1,11 @@
 import unittest
-import GroceryPOS
+from GroceryPOS import GroceryPOS
 
 class groceryPOSTest(unittest.TestCase):
-    pass
+
+    def setUp(self):
+        self.grocery = GroceryPOS()
+
+    def testNoTotal(self):
+
+        self.assertEqual(self.grocery.total,0)
