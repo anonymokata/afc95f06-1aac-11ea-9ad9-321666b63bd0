@@ -9,3 +9,7 @@ class groceryPOSTest(unittest.TestCase):
     def testNoTotal(self):
 
         self.assertEqual(self.grocery.total, 0)
+
+
+if __name__ == '__main__':
+    unittest.main()
