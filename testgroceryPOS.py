@@ -8,4 +8,4 @@ class groceryPOSTest(unittest.TestCase):
 
     def testNoTotal(self):
 
-        self.assertEqual(self.grocery.total,0)
+        self.assertEqual(self.grocery.total, 0)
