@@ -3,12 +3,18 @@ from GroceryPOS import GroceryPOS
 
 class groceryPOSTest(unittest.TestCase):
 
+
     def setUp(self):
+
         self.grocery = GroceryPOS()
 
     def testNoTotal(self):
 
         self.assertEqual(self.grocery.total, 0)
+
+    def testAddToTotal(self):
+
+        self.assertEqual(self.grocery.total, 5)
 
 
 if __name__ == '__main__':
