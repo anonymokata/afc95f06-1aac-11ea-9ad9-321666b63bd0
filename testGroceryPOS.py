@@ -16,12 +16,14 @@ class groceryPOSTest(unittest.TestCase):
 
         self.grocery.addToTotal()
         self.assertEqual(self.grocery.total, 5)
+        self.assertEqual(self.grocery.total, 10)
 
 
     def testRemoveFromTotal(self):
 
         self.grocery.removeFromTotal()
         self.assertEqual(self.grocery.total, -5)
+
 
 
 if __name__ == '__main__':
