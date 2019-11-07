@@ -18,5 +18,11 @@ class groceryPOSTest(unittest.TestCase):
         self.assertEqual(self.grocery.total, 5)
 
 
+    def testRemoveFromTotal(self):
+
+        self.grocery.removeFromTotal()
+        self.assertEqual(self.grocery.total, -5)
+
+
 if __name__ == '__main__':
     unittest.main()
