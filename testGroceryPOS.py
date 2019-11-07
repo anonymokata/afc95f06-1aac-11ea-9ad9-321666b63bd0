@@ -14,6 +14,7 @@ class groceryPOSTest(unittest.TestCase):
 
     def testAddToTotal(self):
 
+        self.grocery.addToTotal()
         self.assertEqual(self.grocery.total, 5)
 
 
