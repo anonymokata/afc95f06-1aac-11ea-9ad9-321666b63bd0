@@ -3,9 +3,9 @@ class GroceryPOS:
     def __init__(self):
         self.total = 0
 
-    def addToTotal(self):
+    def addToTotal(self, item):
 
-        self.total += 5
+        self.total += item
 
     def removeFromTotal(self):
 
