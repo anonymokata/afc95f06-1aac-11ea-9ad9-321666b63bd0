@@ -2,6 +2,7 @@
 class GroceryPOS:
     def __init__(self):
         self.total = 0
+        self.inventory = []
 
     def addToTotal(self, item):
 
@@ -13,3 +14,7 @@ class GroceryPOS:
 
     def chooseSpecificItem(self, choice):
         return choice
+
+    def addSpecificItemToTotal(self, name):
+        self.total += 5
+
