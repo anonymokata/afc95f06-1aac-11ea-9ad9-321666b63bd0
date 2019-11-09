@@ -7,6 +7,7 @@ class groceryPOSTest(unittest.TestCase):
     def setUp(self):
 
         self.grocery = GroceryPOS()
+        self.grocery.fillInventory()
 
     def testNoTotal(self):
 
@@ -42,6 +43,10 @@ class groceryPOSTest(unittest.TestCase):
 
         self.grocery.addSpecificItemToTotal('apple')
         self.assertEqual(self.grocery.total, 5)
+        self.grocery.addSpecificItemToTotal('grapes')
+        self.assertEqual(self.grocery.total, 8)
+        self.grocery.addSpecificItemToTotal('banana')
+        self.assertEqual(self.grocery.total, 12)
 
 
 if __name__ == '__main__':

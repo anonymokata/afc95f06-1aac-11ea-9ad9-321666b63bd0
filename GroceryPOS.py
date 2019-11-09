@@ -16,5 +16,24 @@ class GroceryPOS:
         return choice
 
     def addSpecificItemToTotal(self, name):
-        self.total += 5
+        for inventoryItem in self.inventory:
+            if inventoryItem.name == name:
+                self.total += inventoryItem.price
 
+    def fillInventory(self):
+
+        apple = InventoryItem('apple', 5)
+        grapes = InventoryItem('grapes', 3)
+        banana = InventoryItem('banana', 4)
+
+        self.inventory.append(apple)
+        self.inventory.append(grapes)
+        self.inventory.append(banana)
+
+
+
+class InventoryItem:
+
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
