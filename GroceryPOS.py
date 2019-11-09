@@ -10,3 +10,7 @@ class GroceryPOS:
     def removeFromTotal(self, item):
 
         self.total -= item
+
+    def chooseSpecificItem(self):
+
+        return 'apple'
