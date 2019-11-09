@@ -7,6 +7,6 @@ class GroceryPOS:
 
         self.total += item
 
-    def removeFromTotal(self):
+    def removeFromTotal(self, item):
 
-        self.total -= 5
+        self.total -= item
