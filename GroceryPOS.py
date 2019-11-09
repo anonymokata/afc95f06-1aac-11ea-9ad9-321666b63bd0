@@ -18,7 +18,7 @@ class GroceryPOS:
     def addSpecificItemToTotal(self, name):
         for inventoryItem in self.inventory:
             if inventoryItem.name == name:
-                self.total += inventoryItem.price
+                self.addToTotal(inventoryItem.price)
 
     def fillInventory(self):
 
