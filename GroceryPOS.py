@@ -11,6 +11,5 @@ class GroceryPOS:
 
         self.total -= item
 
-    def chooseSpecificItem(self):
-
-        return 'apple'
+    def chooseSpecificItem(self, choice):
+        return choice

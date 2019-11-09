@@ -33,8 +33,10 @@ class groceryPOSTest(unittest.TestCase):
 
     def testAddSpecificItem(self):
 
-        self.assertEqual(self.grocery.chooseSpecificItem(),'apple')
 
+        self.assertEqual(self.grocery.chooseSpecificItem('apple'),'apple')
+        self.assertEqual(self.grocery.chooseSpecificItem('grapes'), 'grapes')
+        self.assertEqual(self.grocery.chooseSpecificItem('banana'), 'banana')
 
 
 if __name__ == '__main__':
