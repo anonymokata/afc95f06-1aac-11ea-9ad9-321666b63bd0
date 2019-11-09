@@ -48,6 +48,11 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addSpecificItemToTotal('banana')
         self.assertEqual(self.grocery.total, 12)
 
+    def testRemoveSpecificItemFromTotal(self):
+
+        self.grocery.removeSpecificItemFromTotal('apple')
+        self.assertEqual(self.grocery.total, -5)
+
 
 
 
