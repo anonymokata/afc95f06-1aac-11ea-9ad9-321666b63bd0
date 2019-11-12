@@ -3,6 +3,7 @@ class GroceryPOS:
     def __init__(self):
         self.total = 0
         self.inventory = []
+        self.cart = []
 
     def addToTotal(self, item):
 
@@ -24,6 +25,12 @@ class GroceryPOS:
         for inventoryItem in self.inventory:
             if inventoryItem.name == name:
                 self.removeFromTotal(inventoryItem.price)
+
+    def addItemToCart(self, name):
+        for inventoryItem in self.inventory:
+            if inventoryItem.name == name:
+                self.cart.append(inventoryItem)
+
 
     def fillInventory(self):
 

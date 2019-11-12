@@ -57,6 +57,13 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.removeSpecificItemFromTotal('banana')
         self.assertEqual(self.grocery.total, -12)
 
+ #I want to create a cart attribute on grocery that will append the scanned item in and pop that
+# item when removed that way items cannot be scanned out more than once, and the balance will never be negative.
+    def testAddItemToCart(self):
+
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(self.grocery.cart[0].name, 'apple')
+
 
 
 
