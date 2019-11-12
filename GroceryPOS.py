@@ -21,7 +21,9 @@ class GroceryPOS:
                 self.addToTotal(inventoryItem.price)
 
     def removeSpecificItemFromTotal(self, name):
-        self.total -= 5
+        for inventoryItem in self.inventory:
+            if inventoryItem.name == name:
+                self.removeFromTotal(inventoryItem.price)
 
     def fillInventory(self):
 
