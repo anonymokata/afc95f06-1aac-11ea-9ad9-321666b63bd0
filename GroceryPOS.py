@@ -31,6 +31,12 @@ class GroceryPOS:
             if inventoryItem.name == name:
                 self.cart.append(inventoryItem)
 
+    def removeItemFromCart(self, name):
+        for inventoryItem in self.inventory:
+            if inventoryItem.name == name:
+                self.cart.remove(inventoryItem)
+
+
 
     def fillInventory(self):
 
