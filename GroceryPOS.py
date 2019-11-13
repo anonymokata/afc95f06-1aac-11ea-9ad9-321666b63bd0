@@ -32,9 +32,12 @@ class GroceryPOS:
                 self.cart.append(inventoryItem)
 
     def removeItemFromCart(self, name):
-        for inventoryItem in self.inventory:
-            if inventoryItem.name == name:
-                self.cart.remove(inventoryItem)
+        if len(self.cart) == 0:
+            print('There are no items in your cart')
+        else:
+            for inventoryItem in self.inventory:
+                if inventoryItem.name == name:
+                    self.cart.remove(inventoryItem)
 
 
 
