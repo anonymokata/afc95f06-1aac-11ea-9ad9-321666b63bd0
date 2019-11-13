@@ -72,6 +72,12 @@ class groceryPOSTest(unittest.TestCase):
         self.assertEqual(len(self.grocery.cart), 0)
         self.grocery.removeItemFromCart(('apple'))
         self.assertEqual(self.grocery.total, 0)
+        self.grocery.addItemToCart('apple')
+        self.grocery.addItemToCart('banana')
+        self.grocery.addItemToCart('grapes')
+        self.grocery.removeItemFromCart('apple')
+        self.grocery.removeItemFromCart('apple')
+
 
 
 
