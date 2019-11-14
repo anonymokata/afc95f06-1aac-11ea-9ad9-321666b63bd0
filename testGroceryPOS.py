@@ -32,7 +32,7 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.removeFromTotal(10)
         self.assertEqual(self.grocery.total, -20)
 
-    def testChooseSpecificItem(self):
+    def testChooseSpecifcItem(self):
 
 
         self.assertEqual(self.grocery.chooseSpecificItem('apple'), 'apple')
@@ -41,45 +41,47 @@ class groceryPOSTest(unittest.TestCase):
 
     def testAddSpecificItemToTotal(self):
 
-        self.grocery.addSpecificItemToTotal('apple')
+        self.grocery.addSpecificItemToTotal('Apple')
         self.assertEqual(self.grocery.total, 5)
-        self.grocery.addSpecificItemToTotal('grapes')
+        self.grocery.addSpecificItemToTotal('Grapes')
         self.assertEqual(self.grocery.total, 8)
-        self.grocery.addSpecificItemToTotal('banana')
+        self.grocery.addSpecificItemToTotal('Banana')
         self.assertEqual(self.grocery.total, 12)
 
     def testRemoveSpecificItemFromTotal(self):
 
-        self.grocery.removeSpecificItemFromTotal('apple')
+        self.grocery.removeSpecificItemFromTotal('Apple')
         self.assertEqual(self.grocery.total, -5)
-        self.grocery.removeSpecificItemFromTotal('grapes')
+        self.grocery.removeSpecificItemFromTotal('Grapes')
         self.assertEqual(self.grocery.total, -8)
-        self.grocery.removeSpecificItemFromTotal('banana')
+        self.grocery.removeSpecificItemFromTotal('Banana')
         self.assertEqual(self.grocery.total, -12)
 
  #I want to create a cart attribute on grocery that will append the scanned item in and pop that
 # item when removed that way items cannot be scanned out more than once, and the balance will never be negative.
     def testAddItemToCart(self):
 
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.cart[0].name, 'apple')
+        self.grocery.addItemToCart('Apple')
+        self.assertEqual(len(self.grocery.cart), 1)
+        self.assertEqual(self.grocery.cart[0].name, 'Apple')
 
     def testRemoveItemFromCart(self):
 
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.cart[0].name, 'apple')
-        self.grocery.removeItemFromCart('apple')
+        self.grocery.addItemToCart('Apple')
+        self.assertEqual(self.grocery.cart[0].name, 'Apple')
+        self.grocery.removeItemFromCart('Apple')
         self.assertEqual(len(self.grocery.cart), 0)
-        self.grocery.removeItemFromCart(('apple'))
+        self.grocery.removeItemFromCart(('Apple'))
         self.assertEqual(self.grocery.total, 0)
-        self.grocery.addItemToCart('apple')
-        self.grocery.addItemToCart('banana')
-        self.grocery.addItemToCart('grapes')
-        self.grocery.removeItemFromCart('apple')
-        self.grocery.removeItemFromCart('apple')
+        self.grocery.addItemToCart('Apple')
+        self.grocery.addItemToCart('Banana')
+        self.grocery.addItemToCart('Grapes')
+        self.grocery.removeItemFromCart('Apple')
+        self.grocery.removeItemFromCart('Apple')
 
 
 
 
 if __name__ == '__main__':
     unittest.main()
+

@@ -1,3 +1,4 @@
+import xlrd
 
 class GroceryPOS:
     def __init__(self):
@@ -31,6 +32,7 @@ class GroceryPOS:
             if inventoryItem.name == name:
                 self.cart.append(inventoryItem)
 
+
     def removeItemFromCart(self, name):
         if len(self.cart) == 0:
             print('There are no items in your cart')
@@ -45,17 +47,23 @@ class GroceryPOS:
             except ValueError:
                 print(f'There is no {scannedItem} in your cart')
 
-
+    def generateItem(self, name, price):
+        return InventoryItem(name, price)
 
     def fillInventory(self):
 
-        apple = InventoryItem('apple', 5)
-        grapes = InventoryItem('grapes', 3)
-        banana = InventoryItem('banana', 4)
+        loc = ('/Users/shawnzanders/PycharmProjects/theForgeCodeKata/GroceryExcel/GroceryInventory.xlsx')
 
-        self.inventory.append(apple)
-        self.inventory.append(grapes)
-        self.inventory.append(banana)
+        wb = xlrd.open_workbook(loc)
+        sheet = wb.sheet_by_index(0)
+
+        sheet.cell_value(0, 0)
+
+        for i in range(sheet.nrows):
+            name = sheet.cell_value(i, 1)
+            price = sheet.cell_value(i, 2)
+            item = self.generateItem(name, price)
+            self.inventory.append(item)
 
 
 
@@ -64,3 +72,4 @@ class InventoryItem:
     def __init__(self, name, price):
         self.name = name
         self.price = price
+
