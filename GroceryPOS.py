@@ -42,8 +42,9 @@ class GroceryPOS:
             try:
                 for inventoryItem in self.inventory:
                     if inventoryItem.name == name:
-                        self.cart.remove(inventoryItem)
                         scannedItem = inventoryItem.name
+                        self.cart.remove(inventoryItem)
+
             except ValueError:
                 print(f'There is no {scannedItem} in your cart')
 
