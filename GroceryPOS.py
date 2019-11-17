@@ -21,9 +21,10 @@ class GroceryPOS:
 
 
     def addSpecificItemToTotal(self, name):
-        for inventoryItem in self.inventory:
+        for inventoryItem in self.cart:
             if inventoryItem.name == name:
-                self.addToTotal(inventoryItem.price)
+                units = self.checkUnits(inventoryItem)
+                self.addToTotal(inventoryItem.price * units)
 
     def removeSpecificItemFromTotal(self, name):
         for inventoryItem in self.inventory:

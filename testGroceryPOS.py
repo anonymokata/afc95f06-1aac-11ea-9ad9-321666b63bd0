@@ -46,12 +46,18 @@ class groceryPOSTest(unittest.TestCase):
 
     def testAddSpecificItemToTotal(self):
 
+        # 2 lbs of apples
+        self.grocery.addItemToCart('Apple')
         self.grocery.addSpecificItemToTotal('Apple')
-        self.assertEqual(self.grocery.total, 5)
+        self.assertEqual(self.grocery.total, 10)
+        # 3 lbs of grapes
+        self.grocery.addItemToCart('Grapes')
         self.grocery.addSpecificItemToTotal('Grapes')
-        self.assertEqual(self.grocery.total, 8)
-        self.grocery.addSpecificItemToTotal('Banana')
-        self.assertEqual(self.grocery.total, 12)
+        self.assertEqual(self.grocery.total, 19)
+        # 1 butter
+        self.grocery.addItemToCart('Butter')
+        self.grocery.addSpecificItemToTotal('Butter')
+        self.assertEqual(self.grocery.total, 22.19)
 
     def testRemoveSpecificItemFromTotal(self):
 
