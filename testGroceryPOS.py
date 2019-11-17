@@ -61,12 +61,18 @@ class groceryPOSTest(unittest.TestCase):
 
     def testRemoveSpecificItemFromTotal(self):
 
+        # 2 lbs of apples
+        self.grocery.addItemToCart('Apple')
         self.grocery.removeSpecificItemFromTotal('Apple')
-        self.assertEqual(self.grocery.total, -5)
+        self.assertEqual(self.grocery.total, -10)
+        # 3 lbs of grapes
+        self.grocery.addItemToCart('Grapes')
         self.grocery.removeSpecificItemFromTotal('Grapes')
-        self.assertEqual(self.grocery.total, -8)
-        self.grocery.removeSpecificItemFromTotal('Banana')
-        self.assertEqual(self.grocery.total, -12)
+        self.assertEqual(self.grocery.total, -19)
+        # 1 butter
+        self.grocery.addItemToCart('Butter')
+        self.grocery.removeSpecificItemFromTotal('Butter')
+        self.assertEqual(self.grocery.total, -22.19)
 
  #I want to create a cart attribute on grocery that will append the scanned item in and pop that
 # item when removed that way items cannot be scanned out more than once, and the balance will never be negative.

@@ -27,9 +27,10 @@ class GroceryPOS:
                 self.addToTotal(inventoryItem.price * units)
 
     def removeSpecificItemFromTotal(self, name):
-        for inventoryItem in self.inventory:
+        for inventoryItem in self.cart:
             if inventoryItem.name == name:
-                self.removeFromTotal(inventoryItem.price)
+                units = self.checkUnits(inventoryItem)
+                self.removeFromTotal(inventoryItem.price * units)
 
     def addItemToCart(self, name):
         for inventoryItem in self.inventory:
@@ -55,7 +56,7 @@ class GroceryPOS:
     def checkUnits(self, inventoryItem):
 
         if inventoryItem.units == 'lb':
-            quantity = int(input('How many pounds are you purchasing?'))
+            quantity = int(input('How many pounds?'))
             return quantity
         elif inventoryItem.units == 'sku':
             return 1
