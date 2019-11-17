@@ -24,13 +24,13 @@ class GroceryPOS:
         for inventoryItem in self.cart:
             if inventoryItem.name == name:
                 units = self.checkUnits(inventoryItem)
-                self.addToTotal(inventoryItem.price * units)
+                self.addToTotal((inventoryItem.price - inventoryItem.markdown) * units)
 
     def removeSpecificItemFromTotal(self, name):
         for inventoryItem in self.cart:
             if inventoryItem.name == name:
                 units = self.checkUnits(inventoryItem)
-                self.removeFromTotal(inventoryItem.price * units)
+                self.removeFromTotal((inventoryItem.price - inventoryItem.markdown) * units)
 
     def addItemToCart(self, name):
         for inventoryItem in self.inventory:
@@ -62,8 +62,8 @@ class GroceryPOS:
             return 1
 
 
-    def generateItem(self, name, price, units):
-        return InventoryItem(name, price, units)
+    def generateItem(self, name, price, units, markdown):
+        return InventoryItem(name, price, units, markdown)
 
     def fillInventory(self):
 
@@ -78,15 +78,17 @@ class GroceryPOS:
             name = sheet.cell_value(i, 1)
             price = sheet.cell_value(i, 2)
             units = sheet.cell_value(i, 3)
-            item = self.generateItem(name, price, units)
+            markdown = sheet.cell_value(i, 4)
+            item = self.generateItem(name, price, units, markdown)
             self.inventory.append(item)
 
 
 
 class InventoryItem:
 
-    def __init__(self, name, price, units):
+    def __init__(self, name, price, units, markdown):
         self.name = name
         self.price = price
         self.units = units
+        self.markdown = markdown
 
