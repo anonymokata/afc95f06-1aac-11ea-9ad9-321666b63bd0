@@ -34,10 +34,15 @@ class groceryPOSTest(unittest.TestCase):
 
     def testChooseSpecifcItem(self):
 
-
-        self.assertEqual(self.grocery.chooseSpecificItem('apple'), 'apple')
-        self.assertEqual(self.grocery.chooseSpecificItem('grapes'), 'grapes')
-        self.assertEqual(self.grocery.chooseSpecificItem('banana'), 'banana')
+        self.grocery.addItemToCart('Apple')
+        item = self.grocery.chooseSpecificItem('Apple')
+        self.assertEqual(item.name, 'Apple')
+        self.grocery.addItemToCart('Grapes')
+        item = self.grocery.chooseSpecificItem('Grapes')
+        self.assertEqual(item.name, 'Grapes')
+        self.grocery.addItemToCart('Banana')
+        item = self.grocery.chooseSpecificItem('Banana')
+        self.assertEqual(item.name, 'Banana')
 
     def testAddSpecificItemToTotal(self):
 
@@ -80,7 +85,14 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.removeItemFromCart('Apple')
         self.grocery.removeItemFromCart('Apple')
 
+    def testCheckUnits(self):
 
+        self.grocery.addItemToCart('Apple')
+        item = self.grocery.chooseSpecificItem('Apple')
+        self.assertEqual(self.grocery.checkUnits(item), 2)
+        self.grocery.addItemToCart('Butter')
+        item = self.grocery.chooseSpecificItem('Butter')
+        self.assertEqual(self.grocery.checkUnits(item), 1)
 
 
 if __name__ == '__main__':

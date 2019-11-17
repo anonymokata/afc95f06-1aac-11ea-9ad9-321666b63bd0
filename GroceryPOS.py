@@ -15,7 +15,10 @@ class GroceryPOS:
         self.total -= item
 
     def chooseSpecificItem(self, choice):
-        return choice
+        for item in self.cart:
+            if item.name == choice:
+                return item
+
 
     def addSpecificItemToTotal(self, name):
         for inventoryItem in self.inventory:
@@ -48,8 +51,17 @@ class GroceryPOS:
             except ValueError:
                 print(f'There is no {scannedItem} in your cart')
 
-    def generateItem(self, name, price):
-        return InventoryItem(name, price)
+    def checkUnits(self, inventoryItem):
+
+        if inventoryItem.units == 'lb':
+            quantity = int(input('How many pounds are you purchasing?'))
+            return quantity
+        elif inventoryItem.units == 'sku':
+            return 1
+
+
+    def generateItem(self, name, price, units):
+        return InventoryItem(name, price, units)
 
     def fillInventory(self):
 
@@ -63,14 +75,16 @@ class GroceryPOS:
         for i in range(sheet.nrows):
             name = sheet.cell_value(i, 1)
             price = sheet.cell_value(i, 2)
-            item = self.generateItem(name, price)
+            units = sheet.cell_value(i, 3)
+            item = self.generateItem(name, price, units)
             self.inventory.append(item)
 
 
 
 class InventoryItem:
 
-    def __init__(self, name, price):
+    def __init__(self, name, price, units):
         self.name = name
         self.price = price
+        self.units = units
 
