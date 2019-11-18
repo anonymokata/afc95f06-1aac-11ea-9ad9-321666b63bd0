@@ -107,7 +107,7 @@ class groceryPOSTest(unittest.TestCase):
 
         self.grocery.addItemToCart('Strawberries')
         item = self.grocery.chooseSpecificItem('Strawberries')
-        self.assertEqual(item.hasSpecialty, True)
+        self.assertEqual(self.grocery.checkSpecialty(item), True)
 
 
 

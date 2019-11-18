@@ -61,6 +61,13 @@ class GroceryPOS:
         elif inventoryItem.units == 'sku':
             return 1
 
+    def checkSpecialty(self, inventoryItem):
+
+        if inventoryItem.hasSpecialty == True:
+            return True
+        else:
+            return False
+
 
     def generateItem(self, name, price, units, markdown, hasSpecialty):
         return InventoryItem(name, price, units, markdown, hasSpecialty)
