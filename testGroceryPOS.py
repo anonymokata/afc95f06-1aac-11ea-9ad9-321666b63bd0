@@ -103,6 +103,11 @@ class groceryPOSTest(unittest.TestCase):
         item = self.grocery.chooseSpecificItem('Butter')
         self.assertEqual(self.grocery.checkUnits(item), 1)
 
+    def testCheckSpecialty(self):
+
+        self.grocery.addItemToCart('Strawberries')
+        item = self.grocery.chooseSpecificItem('Strawberries')
+        self.assertEqual(item.hasSpecialty, True)
 
 
 

@@ -62,8 +62,8 @@ class GroceryPOS:
             return 1
 
 
-    def generateItem(self, name, price, units, markdown):
-        return InventoryItem(name, price, units, markdown)
+    def generateItem(self, name, price, units, markdown, hasSpecialty):
+        return InventoryItem(name, price, units, markdown, hasSpecialty)
 
     def fillInventory(self):
 
@@ -72,23 +72,25 @@ class GroceryPOS:
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
 
-        sheet.cell_value(0, 0)
+        sheet.cell_value(0, 1)
 
         for i in range(sheet.nrows):
             name = sheet.cell_value(i, 1)
             price = sheet.cell_value(i, 2)
             units = sheet.cell_value(i, 3)
             markdown = sheet.cell_value(i, 4)
-            item = self.generateItem(name, price, units, markdown)
+            hasSpecialty = sheet.cell_value(i, 5)
+            item = self.generateItem(name, price, units, markdown, hasSpecialty)
             self.inventory.append(item)
 
 
 
 class InventoryItem:
 
-    def __init__(self, name, price, units, markdown):
+    def __init__(self, name, price, units, markdown, hasSpecialty):
         self.name = name
         self.price = price
         self.units = units
         self.markdown = markdown
+        self.hasSpecialty = hasSpecialty
 
