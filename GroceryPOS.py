@@ -5,6 +5,7 @@ class GroceryPOS:
         self.total = 0
         self.inventory = []
         self.cart = []
+        self.listOfItemNamesInCart = []
 
     def addToTotal(self, item):
 
@@ -14,41 +15,65 @@ class GroceryPOS:
 
         self.total -= item
 
-    def chooseSpecificItem(self, choice):
+    def printInventoryandPrices(self):
+        for item in self.inventory:
+            print(f'{item.name}: + {item.price - item.markdown}/ + {item.units}')
+
+
+    def chooseSpecificItemFromCart(self, name):
         for item in self.cart:
-            if item.name == choice:
+            if item.name == name:
                 return item
 
+    def chooseSpecificItemFromInventory(self, name):
+        for item in self.cart:
+            if item.name == name:
+                return item
 
-    def addSpecificItemToTotal(self, name):
-        for inventoryItem in self.cart:
-            if inventoryItem.name == name:
-                units = self.checkUnits(inventoryItem)
-                self.addToTotal((inventoryItem.price - inventoryItem.markdown) * units)
+    def addSpecificItemToTotal(self, inventoryItem):
 
-    def removeSpecificItemFromTotal(self, name):
-        for inventoryItem in self.cart:
-            if inventoryItem.name == name:
-                units = self.checkUnits(inventoryItem)
-                self.removeFromTotal((inventoryItem.price - inventoryItem.markdown) * units)
+        units = self.checkUnits(inventoryItem)
+        self.addToTotal((inventoryItem.price - inventoryItem.markdown) * units)
+
+    def removeSpecificItemFromTotal(self, inventoryItem):
+
+        self.removeFromTotal((inventoryItem.price - inventoryItem.markdown) * inventoryItem.pounds)
+
 
     def addItemToCart(self, name):
-        for inventoryItem in self.inventory:
-            if inventoryItem.name == name:
-                self.cart.append(inventoryItem)
 
+        if name not in self.listOfItemNamesInCart:
+            for inventoryItem in self.inventory:
+                if inventoryItem.name == name:
+                    self.listOfItemNamesInCart.append(inventoryItem.name)
+                    self.cart.append(inventoryItem)
+                    self.addSpecificItemToTotal(inventoryItem)
+                    self.checkSpecialty(inventoryItem)
+        else:
+            cartItem = self.chooseSpecificItemFromCart(name)
+            if cartItem.units == 'lb':
+                units = int(input(f'How many pounds of {cartItem.name} would you like to add?'))
+                cartItem.pounds += units
+                self.total += (cartItem.price - cartItem.markdown) * units
+            elif cartItem.units == 'sku':
+                self.listOfItemNamesInCart.append(cartItem.name)
+                self.cart.append(cartItem)
+                self.addSpecificItemToTotal(cartItem)
+                self.checkSpecialty(cartItem)
 
     def removeItemFromCart(self, name):
         if len(self.cart) == 0:
             print('There are no items in your cart')
-
+        elif name not in self.listOfItemNamesInCart:
+            print('item is not in cart')
         else:
             scannedItem = ''
             try:
-                for inventoryItem in self.inventory:
-                    if inventoryItem.name == name:
-                        scannedItem = inventoryItem.name
-                        self.cart.remove(inventoryItem)
+                cartItem = self.chooseSpecificItemFromCart(name)
+                scannedItem = cartItem.name
+                self.removeSpecificItemFromTotal(cartItem)
+                self.listOfItemNamesInCart.remove(cartItem.name)
+                self.cart.remove(cartItem)
 
             except ValueError:
                 print(f'There is no {scannedItem} in your cart')
@@ -56,21 +81,33 @@ class GroceryPOS:
     def checkUnits(self, inventoryItem):
 
         if inventoryItem.units == 'lb':
-            quantity = int(input('How many pounds?'))
-            return quantity
+            quantity = int(input(f'How many pounds of {inventoryItem.name}?'))
+            inventoryItem.pounds = quantity
+            return inventoryItem.pounds
         elif inventoryItem.units == 'sku':
-            return 1
+            inventoryItem.pounds = 1
+            return inventoryItem.pounds
 
     def checkSpecialty(self, inventoryItem):
 
         if inventoryItem.hasSpecialty == True:
+            self.useSpecialty(inventoryItem)
             return True
         else:
             return False
 
+    def useSpecialty(self, inventoryItem):
 
-    def generateItem(self, name, price, units, markdown, hasSpecialty):
-        return InventoryItem(name, price, units, markdown, hasSpecialty)
+        if inventoryItem.specialtyType == 'bogo':
+            counter = 0
+            for item in self.cart:
+                if item.name == inventoryItem.name:
+                    counter += 1
+            if counter % 2 == 0:
+                self.total -= (inventoryItem.price - inventoryItem.markdown)
+
+    def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType):
+        return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType)
 
     def fillInventory(self):
 
@@ -87,17 +124,23 @@ class GroceryPOS:
             units = sheet.cell_value(i, 3)
             markdown = sheet.cell_value(i, 4)
             hasSpecialty = sheet.cell_value(i, 5)
-            item = self.generateItem(name, price, units, markdown, hasSpecialty)
+            specialtyType = sheet. cell_value(i, 6)
+            item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType)
             self.inventory.append(item)
+
 
 
 
 class InventoryItem:
 
-    def __init__(self, name, price, units, markdown, hasSpecialty):
+    def __init__(self, name, price, units, markdown, hasSpecialty, specialtyType):
         self.name = name
         self.price = price
         self.units = units
         self.markdown = markdown
         self.hasSpecialty = hasSpecialty
+        self.specialtyType = specialtyType
+        self.pounds = 0
+
+
 
