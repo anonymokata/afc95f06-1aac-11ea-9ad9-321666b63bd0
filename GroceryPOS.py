@@ -35,20 +35,19 @@ class GroceryPOS:
         units = self.checkUnits(inventoryItem)
         self.addToTotal((inventoryItem.price - inventoryItem.markdown) * units)
 
-    def removeSpecificItemFromTotal(self, inventoryItem):
+    def removeSpecificItemFromTotal(self, cartItem):
 
-        self.removeFromTotal((inventoryItem.price - inventoryItem.markdown) * inventoryItem.pounds)
+        self.removeFromTotal((cartItem.price - cartItem.markdown) * cartItem.pounds)
 
 
     def addItemToCart(self, name):
 
         if name not in self.listOfItemNamesInCart:
-            for inventoryItem in self.inventory:
-                if inventoryItem.name == name:
-                    self.listOfItemNamesInCart.append(inventoryItem.name)
-                    self.cart.append(inventoryItem)
-                    self.addSpecificItemToTotal(inventoryItem)
-                    self.checkSpecialty(inventoryItem)
+            inventoryItem = self.chooseSpecificItemFromInventory(name)
+            self.listOfItemNamesInCart.append(inventoryItem.name)
+            self.cart.append(inventoryItem)
+            self.addSpecificItemToTotal(inventoryItem)
+            self.checkSpecialty(inventoryItem)
         else:
             cartItem = self.chooseSpecificItemFromCart(name)
             if cartItem.units == 'lb':
