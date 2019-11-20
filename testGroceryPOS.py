@@ -137,10 +137,12 @@ class groceryPOSTest(unittest.TestCase):
         print('testCheckUnits')
 
         # add 2 pounds of apples make sure units are kept correct
-        self.assertEqual(self.grocery.addItemToCart('Apple'), 2)
+        self.grocery.addItemToCart('Apple')
+        self.assertEqual(self.grocery.cart[0].pounds, 2)
 
         # adds 1 butter to make sure units are kept correct
-        self.assertEqual(self.grocery.addItemToCart('Butter'), 1)
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.cart[1].pounds, 1)
 
     def testCheckSpecialty(self):
 
@@ -159,6 +161,15 @@ class groceryPOSTest(unittest.TestCase):
         # this tests the bogo when four butters are added
         self.grocery.addItemToCart('Butter')
         self.assertEqual(self.grocery.total, 6)
+
+        # this tests the bogo limit of 6
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 9)
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 9)
+        self.grocery.addItemToCart('Butter')
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 15)
 
 
 

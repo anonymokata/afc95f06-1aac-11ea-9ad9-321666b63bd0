@@ -26,7 +26,7 @@ class GroceryPOS:
                 return item
 
     def chooseSpecificItemFromInventory(self, name):
-        for item in self.cart:
+        for item in self.inventory:
             if item.name == name:
                 return item
 
