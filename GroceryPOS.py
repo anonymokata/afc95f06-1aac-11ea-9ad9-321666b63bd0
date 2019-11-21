@@ -81,11 +81,11 @@ class GroceryPOS:
 
         if inventoryItem.units == 'lb':
             quantity = int(input(f'How many pounds of {inventoryItem.name}?'))
-            inventoryItem.pounds = quantity
-            return inventoryItem.pounds
+            inventoryItem.quantity = quantity
+            return inventoryItem.quantity
         elif inventoryItem.units == 'sku':
-            inventoryItem.pounds = 1
-            return inventoryItem.pounds
+            inventoryItem.quantity = 1
+            return inventoryItem.quantity
 
     def checkSpecialty(self, inventoryItem):
 
@@ -99,7 +99,6 @@ class GroceryPOS:
 
         if inventoryItem.specialtyType == 'bogo':
             counter = 0
-
             for item in self.cart:
                 if item.name == inventoryItem.name:
                     counter += 1
@@ -168,7 +167,7 @@ class InventoryItem:
         self.hasSpecialty = hasSpecialty
         self.specialtyType = specialtyType
         self.limit = limit
-        self.pounds = 0
+        self.quantity = 0
         self.specialtyVariable1 = specialtyVariable1
         self.specialtyVariable2 = specialtyVariable2
         self.specialtyVariable3 = specialtyVariable3
