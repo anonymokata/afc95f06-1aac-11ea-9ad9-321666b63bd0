@@ -104,7 +104,8 @@ class GroceryPOS:
                     counter += 1
             if counter <= inventoryItem.limit:
                 if counter % inventoryItem.specialtyVariable1 == 0:
-                    self.total -= (inventoryItem.price - inventoryItem.markdown)
+                     self.total -= (inventoryItem.price - inventoryItem.markdown)
+
 
         if inventoryItem.specialtyType == 'nforx':
             counter = 0

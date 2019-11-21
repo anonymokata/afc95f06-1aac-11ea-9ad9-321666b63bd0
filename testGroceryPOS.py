@@ -148,6 +148,7 @@ class groceryPOSTest(unittest.TestCase):
     def testCheckBogo(self):
 
         print('testCheckBogo')
+
         # this tests the bogo specialty that when two butters are added
         self.grocery.addItemToCart('Butter')
         self.assertEqual(self.grocery.total, 3)
@@ -171,6 +172,11 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Butter')
         self.grocery.addItemToCart('Butter')
         self.assertEqual(self.grocery.total, 15)
+
+        # this tests when specialty is given to a per pound object it works as well
+        # this particular test is 2
+        self.grocery.addItemToCart('Apple')
+        self.assertEqual(self.grocery.total, 19)
 
     def testCheckNforX(self):
 
