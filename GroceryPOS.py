@@ -99,14 +99,15 @@ class GroceryPOS:
 
         if inventoryItem.specialtyType == 'bogo':
             counter = 0
-            for item in self.cart:
-                if item.name == inventoryItem.name:
-                    counter += 1
-            if counter % 2 == 0:
-                self.total -= (inventoryItem.price - inventoryItem.markdown)
+            while counter <= inventoryItem.limit:
+                for item in self.cart:
+                    if item.name == inventoryItem.name:
+                        counter += 1
+                if counter % 2 == 0:
+                    self.total -= (inventoryItem.price - inventoryItem.markdown)
 
-    def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType):
-        return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType)
+    def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType, limit):
+        return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType, limit)
 
     def fillInventory(self):
 
@@ -123,8 +124,9 @@ class GroceryPOS:
             units = sheet.cell_value(i, 3)
             markdown = sheet.cell_value(i, 4)
             hasSpecialty = sheet.cell_value(i, 5)
-            specialtyType = sheet. cell_value(i, 6)
-            item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType)
+            specialtyType = sheet.cell_value(i, 6)
+            limit = sheet.cell_value(i, 7)
+            item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType, limit)
             self.inventory.append(item)
 
 
@@ -132,13 +134,14 @@ class GroceryPOS:
 
 class InventoryItem:
 
-    def __init__(self, name, price, units, markdown, hasSpecialty, specialtyType):
+    def __init__(self, name, price, units, markdown, hasSpecialty, specialtyType, limit):
         self.name = name
         self.price = price
         self.units = units
         self.markdown = markdown
         self.hasSpecialty = hasSpecialty
         self.specialtyType = specialtyType
+        self.limit = 0
         self.pounds = 0
 
 
