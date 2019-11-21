@@ -144,6 +144,7 @@ class groceryPOSTest(unittest.TestCase):
     #     self.grocery.addItemToCart('Butter')
     #     self.assertEqual(self.grocery.cart[1].pounds, 1)
 
+    """All currently only ran for sku items."""
     def testCheckBogo(self):
 
         print('testCheckBogo')
@@ -173,6 +174,7 @@ class groceryPOSTest(unittest.TestCase):
 
     def testCheckNforX(self):
 
+        print('testCheckNforX')
         # tests n for x (this particular test was 3 for 10)
         self.grocery.addItemToCart('Bacon')
         self.grocery.addItemToCart('Bacon')
@@ -187,6 +189,13 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Bacon')
         self.assertEqual(self.grocery.total, 20)
 
+    def testNMatX(self):
+
+        print('testNMatX')
+        self.grocery.addItemToCart('Milk')
+        self.grocery.addItemToCart('Milk')
+        self.grocery.addItemToCart('Milk')
+        self.assertEqual(self.grocery.total, 7.50)
 
 
 
