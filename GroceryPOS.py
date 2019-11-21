@@ -104,11 +104,21 @@ class GroceryPOS:
                 if item.name == inventoryItem.name:
                     counter += 1
             if counter <= inventoryItem.limit:
-                if counter % 2 == 0:
+                if counter % inventoryItem.specialtyVariable1 == 0:
                     self.total -= (inventoryItem.price - inventoryItem.markdown)
 
-    def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType, limit):
-        return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType, limit)
+        if inventoryItem.specialtyType == 'nforx':
+            counter = 0
+            for item in self.cart:
+                if item.name == inventoryItem.name:
+                    counter +=1
+            if counter % inventoryItem.specialtyVariable1 == 0:
+                self.total -= (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
+                self.total += inventoryItem.specialtyVariable2
+
+
+    def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3):
+        return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)
 
     def fillInventory(self):
 
@@ -127,7 +137,10 @@ class GroceryPOS:
             hasSpecialty = sheet.cell_value(i, 5)
             specialtyType = sheet.cell_value(i, 6)
             limit = sheet.cell_value(i, 7)
-            item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType, limit)
+            specialtyVariable1 = sheet.cell_value(i, 8)
+            specialtyVariable2 = sheet.cell_value(i, 9)
+            specialtyVariable3 = sheet.cell_value(i, 10)
+            item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)
             self.inventory.append(item)
 
 
@@ -135,7 +148,7 @@ class GroceryPOS:
 
 class InventoryItem:
 
-    def __init__(self, name, price, units, markdown, hasSpecialty, specialtyType, limit):
+    def __init__(self, name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3):
         self.name = name
         self.price = price
         self.units = units
@@ -144,6 +157,11 @@ class InventoryItem:
         self.specialtyType = specialtyType
         self.limit = limit
         self.pounds = 0
+        self.specialtyVariable1 = specialtyVariable1
+        self.specialtyVariable2 = specialtyVariable2
+        self.specialtyVariable3 = specialtyVariable3
+
+
 
 
 

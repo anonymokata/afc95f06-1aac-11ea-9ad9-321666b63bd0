@@ -143,40 +143,51 @@ class groceryPOSTest(unittest.TestCase):
     #     # adds 1 butter to make sure units are kept correct
     #     self.grocery.addItemToCart('Butter')
     #     self.assertEqual(self.grocery.cart[1].pounds, 1)
-    #
-    # def testCheckBogo(self):
-    #
-    #     print('testCheckBogo')
-    #     # this tests the bogo specialty that when two butters are added
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 3)
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 3)
-    #     self.assertEqual(len(self.grocery.cart), 2)
-    #
-    #     # this tests the bogo when three butters are added
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 6)
-    #
-    #     # this tests the bogo when four butters are added
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 6)
-    #
-    #     # this tests the bogo limit of 6
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 9)
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 9)
-    #     self.grocery.addItemToCart('Butter')
-    #     self.grocery.addItemToCart('Butter')
-    #     self.assertEqual(self.grocery.total, 15)
+
+    def testCheckBogo(self):
+
+        print('testCheckBogo')
+        # this tests the bogo specialty that when two butters are added
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 3)
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 3)
+        self.assertEqual(len(self.grocery.cart), 2)
+
+        # this tests the bogo when three butters are added
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 6)
+
+        # this tests the bogo when four butters are added
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 6)
+
+        # this tests the bogo limit of 6
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 9)
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 9)
+        self.grocery.addItemToCart('Butter')
+        self.grocery.addItemToCart('Butter')
+        self.assertEqual(self.grocery.total, 15)
 
     def testCheckNforX(self):
 
+        # tests n for x (this particular test was 3 for 10)
         self.grocery.addItemToCart('Bacon')
         self.grocery.addItemToCart('Bacon')
         self.grocery.addItemToCart('Bacon')
         self.assertEqual(self.grocery.total, 10)
+
+        # tests three more with checks on non qualifying amounts
+        self.grocery.addItemToCart('Bacon')
+        self.assertEqual(self.grocery.total, 14)
+        self.grocery.addItemToCart('Bacon')
+        self.assertEqual(self.grocery.total, 18)
+        self.grocery.addItemToCart('Bacon')
+        self.assertEqual(self.grocery.total, 20)
+
+
 
 
 
