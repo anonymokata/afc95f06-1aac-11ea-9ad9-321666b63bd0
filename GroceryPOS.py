@@ -99,10 +99,11 @@ class GroceryPOS:
 
         if inventoryItem.specialtyType == 'bogo':
             counter = 0
-            while counter <= inventoryItem.limit:
-                for item in self.cart:
-                    if item.name == inventoryItem.name:
-                        counter += 1
+
+            for item in self.cart:
+                if item.name == inventoryItem.name:
+                    counter += 1
+            if counter <= inventoryItem.limit:
                 if counter % 2 == 0:
                     self.total -= (inventoryItem.price - inventoryItem.markdown)
 
@@ -141,7 +142,7 @@ class InventoryItem:
         self.markdown = markdown
         self.hasSpecialty = hasSpecialty
         self.specialtyType = specialtyType
-        self.limit = 0
+        self.limit = limit
         self.pounds = 0
 
 
