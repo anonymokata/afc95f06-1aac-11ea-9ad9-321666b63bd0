@@ -1,4 +1,5 @@
 import xlrd
+import math
 
 class GroceryPOS:
     def __init__(self):
@@ -98,14 +99,18 @@ class GroceryPOS:
     def useSpecialty(self, inventoryItem):
 
         if inventoryItem.specialtyType == 'bogo':
-            counter = 0
-            for item in self.cart:
-                if item.name == inventoryItem.name:
-                    counter += 1
-            if counter <= inventoryItem.limit:
-                if counter % inventoryItem.specialtyVariable1 == 0:
-                     self.total -= (inventoryItem.price - inventoryItem.markdown)
-
+            if inventoryItem.units == 'sku':
+                counter = 0
+                for item in self.cart:
+                    if item.name == inventoryItem.name:
+                        counter += 1
+                if counter <= inventoryItem.limit:
+                    if counter % inventoryItem.specialtyVariable1 == 0:
+                        self.total -= (inventoryItem.price - inventoryItem.markdown)
+            elif inventoryItem.units == 'lb':
+                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
+                self.total -= qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
+                pass
 
         if inventoryItem.specialtyType == 'nforx':
             counter = 0
