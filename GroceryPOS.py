@@ -38,7 +38,7 @@ class GroceryPOS:
 
     def removeSpecificItemFromTotal(self, cartItem):
 
-        self.removeFromTotal((cartItem.price - cartItem.markdown) * cartItem.pounds)
+        self.removeFromTotal((cartItem.price - cartItem.markdown) * cartItem.quantity)
 
 
     def addItemToCart(self, name):
@@ -52,6 +52,7 @@ class GroceryPOS:
         else:
             cartItem = self.chooseSpecificItemFromCart(name)
             if cartItem.units == 'lb':
+                self.removeSpecialty(cartItem)
                 units = int(input(f'How many pounds of {cartItem.name} would you like to add?'))
                 cartItem.quantity += units
                 self.total += (cartItem.price - cartItem.markdown) * units
@@ -72,6 +73,7 @@ class GroceryPOS:
             try:
                 cartItem = self.chooseSpecificItemFromCart(name)
                 scannedItem = cartItem.name
+                self.removeSpecialty(cartItem)
                 self.removeSpecificItemFromTotal(cartItem)
                 self.listOfItemNamesInCart.remove(cartItem.name)
                 self.cart.remove(cartItem)
@@ -133,7 +135,21 @@ class GroceryPOS:
             if counter % (spv1 + spv2) == 0:
                 self.total -= ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
 
+    def removeSpecialty(self, inventoryItem):
 
+        if inventoryItem.specialtyType == 'bogo':
+            if inventoryItem.units == 'sku':
+                counter = 0
+                for item in self.cart:
+                    if item.name == inventoryItem.name:
+                        counter += 1
+                if counter <= inventoryItem.limit:
+                    if counter % inventoryItem.specialtyVariable1 == 0:
+                        self.total += (inventoryItem.price - inventoryItem.markdown)
+            elif inventoryItem.units == 'lb':
+                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
+                self.total += qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
+                pass
 
     def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3):
         return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)

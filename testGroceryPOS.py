@@ -164,6 +164,14 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Butter')
         self.assertEqual(self.grocery.total, 6)
 
+        # this tests when two butters are removed that it functions properly
+        self.grocery.removeItemFromCart('Butter')
+        self.assertEqual(self.grocery.total, 6)
+        self.grocery.removeItemFromCart('Butter')
+        self.assertEqual(self.grocery.total, 3)
+
+        self.grocery.addItemToCart('Butter')
+        self.grocery.addItemToCart('Butter')
         # this tests the bogo limit of 6
         self.grocery.addItemToCart('Butter')
         self.assertEqual(self.grocery.total, 9)
@@ -183,6 +191,11 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Apple')
         self.assertEqual(self.grocery.total, 23)
 
+        # this tests when more apples are added it still responds appropriately
+        # 2 more pounds of apples will be added
+        self.grocery.addItemToCart('Apple')
+        self.assertEqual(self.grocery.total, 27)
+
     def testCheckNforX(self):
 
         print('testCheckNforX')
@@ -191,6 +204,8 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Bacon')
         self.grocery.addItemToCart('Bacon')
         self.assertEqual(self.grocery.total, 10)
+
+
 
         # tests three more with checks on non qualifying amounts
         self.grocery.addItemToCart('Bacon')
