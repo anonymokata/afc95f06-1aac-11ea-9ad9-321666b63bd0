@@ -178,6 +178,11 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Apple')
         self.assertEqual(self.grocery.total, 19)
 
+        # this tests when more apples are added it still responds appropriately
+        # 2 more pounds of apples will be added
+        self.grocery.addItemToCart('Apple')
+        self.assertEqual(self.grocery.total, 23)
+
     def testCheckNforX(self):
 
         print('testCheckNforX')

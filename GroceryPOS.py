@@ -53,8 +53,9 @@ class GroceryPOS:
             cartItem = self.chooseSpecificItemFromCart(name)
             if cartItem.units == 'lb':
                 units = int(input(f'How many pounds of {cartItem.name} would you like to add?'))
-                cartItem.pounds += units
+                cartItem.quantity += units
                 self.total += (cartItem.price - cartItem.markdown) * units
+                self.checkSpecialty(cartItem)
             elif cartItem.units == 'sku':
                 self.listOfItemNamesInCart.append(cartItem.name)
                 self.cart.append(cartItem)
