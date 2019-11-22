@@ -58,6 +58,7 @@ class GroceryPOS:
                 self.total += (cartItem.price - cartItem.markdown) * units
                 self.checkSpecialty(cartItem)
             elif cartItem.units == 'sku':
+
                 self.listOfItemNamesInCart.append(cartItem.name)
                 self.cart.append(cartItem)
                 self.addSpecificItemToTotal(cartItem)
@@ -113,16 +114,20 @@ class GroceryPOS:
             elif inventoryItem.units == 'lb':
                 qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
                 self.total -= qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
-                pass
 
         if inventoryItem.specialtyType == 'nforx':
-            counter = 0
-            for item in self.cart:
-                if item.name == inventoryItem.name:
-                    counter += 1
-            if counter % inventoryItem.specialtyVariable1 == 0:
+            if inventoryItem.units == 'sku':
+                counter = 0
+                for item in self.cart:
+                    if item.name == inventoryItem.name:
+                        counter += 1
+                if counter % inventoryItem.specialtyVariable1 == 0:
+                    self.total -= (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
+                    self.total += inventoryItem.specialtyVariable2
+            elif inventoryItem.units == 'lb':
+                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
                 self.total -= (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
-                self.total += inventoryItem.specialtyVariable2
+                self.total += qualifyingSpecialties * (inventoryItem.specialtyVariable2)
 
         if inventoryItem.specialtyType == 'nmatx':
             spv1 = inventoryItem.specialtyVariable1
@@ -149,7 +154,32 @@ class GroceryPOS:
             elif inventoryItem.units == 'lb':
                 qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
                 self.total += qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
-                pass
+
+        if inventoryItem.specialtyType == 'nforx':
+            if inventoryItem.units == 'sku':
+                counter = 0
+                for item in self.cart:
+                    if item.name == inventoryItem.name:
+                        counter += 1
+                difference = (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown)) - (inventoryItem.specialtyVariable2)
+                self.total += difference
+            elif inventoryItem.units == 'lb':
+                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
+                self.total -= (qualifyingSpecialties * inventoryItem.specialtyVariable2)
+
+        if inventoryItem.specialtyType == 'nmatx':
+            spv1 = inventoryItem.specialtyVariable1
+            spv2 = inventoryItem.specialtyVariable2
+            spv3 = inventoryItem.specialtyVariable3
+            counter = 0
+            for item in self.cart:
+                if item.name == inventoryItem.name:
+                    counter += 1
+            if counter % (spv1 + spv2) == 0:
+                self.total -= ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
+
+
+
 
     def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3):
         return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)

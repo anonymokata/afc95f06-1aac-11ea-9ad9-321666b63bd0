@@ -9,11 +9,11 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery = GroceryPOS()
         self.grocery.fillInventory()
 
-    # def testNoTotal(self):
-    #
-    #     self.assertEqual(self.grocery.total, 0)
-    #
-    #
+    def testNoTotal(self):
+
+        self.assertEqual(self.grocery.total, 0)
+
+
     # def testAddToTotal(self):
     #
     #     # adds 5 to total
@@ -206,7 +206,6 @@ class groceryPOSTest(unittest.TestCase):
         self.assertEqual(self.grocery.total, 10)
 
 
-
         # tests three more with checks on non qualifying amounts
         self.grocery.addItemToCart('Bacon')
         self.assertEqual(self.grocery.total, 14)
@@ -215,6 +214,29 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Bacon')
         self.assertEqual(self.grocery.total, 20)
 
+        # this tests when one is removed it responds correctly
+        self.grocery.removeItemFromCart('Bacon')
+        self.assertEqual(self.grocery.total, 18)
+
+        # tests that adding it back works
+        self.grocery.addItemToCart('Bacon')
+        self.assertEqual(self.grocery.total, 20)
+
+        # this tests when specialty is given to a per pound object it works as well
+        # this particular test is 3
+        self.grocery.addItemToCart('Grapes')
+        self.assertEqual(self.grocery.total, 28)
+
+        # this tests when more grapes are added it still responds appropriately
+        # 3 more pounds of grapes will be added
+        self.grocery.addItemToCart('Grapes')
+        self.assertEqual(self.grocery.total, 36)
+
+        # this tests when more grapes are added it still responds appropriately
+        # 3 more pounds of grapes will be added
+        self.grocery.addItemToCart('Grapes')
+        self.assertEqual(self.grocery.total, 44)
+
     def testNMatX(self):
 
         print('testNMatX')
@@ -222,6 +244,8 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('Milk')
         self.grocery.addItemToCart('Milk')
         self.assertEqual(self.grocery.total, 7.50)
+
+
 
 
 
