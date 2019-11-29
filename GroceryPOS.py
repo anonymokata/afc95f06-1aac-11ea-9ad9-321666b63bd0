@@ -18,8 +18,7 @@ class GroceryPOS:
 
     def printInventoryandPrices(self):
         for item in self.inventory:
-            print(f'{item.name}: + {item.price - item.markdown}/ + {item.units}')
-
+            print(f'{item.name}: {item.price}/{item.units} originally {item.price}')
 
     def chooseSpecificItemFromCart(self, name):
         for item in self.cart:
@@ -77,7 +76,6 @@ class GroceryPOS:
                 self.removeSpecificItemFromTotal(cartItem)
                 self.listOfItemNamesInCart.remove(cartItem.name)
                 self.cart.remove(cartItem)
-
             except ValueError:
                 print(f'There is no {scannedItem} in your cart')
 
@@ -111,8 +109,13 @@ class GroceryPOS:
                     if counter % inventoryItem.specialtyVariable1 == 0:
                         self.total -= (inventoryItem.price - inventoryItem.markdown)
             elif inventoryItem.units == 'lb':
-                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
-                self.total -= qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
+                if inventoryItem.quantity <= inventoryItem.limit:
+                    qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
+                    self.total -= qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
+                else:
+                    qualifyingSpecialties = math.floor(inventoryItem.limit / inventoryItem.specialtyVariable1)
+                    self.total -= qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
+
 
         if inventoryItem.specialtyType == 'nforx':
             if inventoryItem.units == 'sku':
@@ -138,53 +141,57 @@ class GroceryPOS:
                 for item in self.cart:
                     if item.name == inventoryItem.name:
                         counter += 1
-                if counter % (spv1 + spv2) == 0:
-                    self.total -= ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
+                if counter <= inventoryItem.limit:
+                    if counter % (spv1 + spv2) == 0:
+                        self.total -= ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
             elif inventoryItem.units == 'lb':
                 qualifyingSpecialties = math.floor(inventoryItem.quantity / (spv1 + spv2))
                 self.total -= qualifyingSpecialties * ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
 
-    def removeSpecialty(self, inventoryItem):
+    def removeSpecialty(self, cartItem):
 
-        if inventoryItem.specialtyType == 'bogo':
-            if inventoryItem.units == 'sku':
+        if cartItem.specialtyType == 'bogo':
+            if cartItem.units == 'sku':
                 counter = 0
                 for item in self.cart:
-                    if item.name == inventoryItem.name:
+                    if item.name == cartItem.name:
                         counter += 1
-                if counter <= inventoryItem.limit:
-                    if counter % inventoryItem.specialtyVariable1 == 0:
-                        self.total += (inventoryItem.price - inventoryItem.markdown)
-            elif inventoryItem.units == 'lb':
-                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
-                self.total += qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
+                if counter <= cartItem.limit:
+                    if counter % cartItem.specialtyVariable1 == 0:
+                        self.total += (cartItem.price - cartItem.markdown)
+            elif cartItem.units == 'lb':
+                qualifyingSpecialties = math.floor(cartItem.quantity / cartItem.specialtyVariable1)
+                self.total += qualifyingSpecialties * (cartItem.price - cartItem.markdown)
 
-        if inventoryItem.specialtyType == 'nforx':
-            if inventoryItem.units == 'sku':
+        if cartItem.specialtyType == 'nforx':
+            if cartItem.units == 'sku':
                 counter = 0
                 for item in self.cart:
-                    if item.name == inventoryItem.name:
+                    if item.name == cartItem.name:
                         counter += 1
-                difference = (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown)) - (inventoryItem.specialtyVariable2)
-                self.total += difference
-            elif inventoryItem.units == 'lb':
-                qualifyingSpecialties = math.floor(inventoryItem.quantity / (inventoryItem.specialtyVariable1))
-                self.total -= (qualifyingSpecialties * inventoryItem.specialtyVariable2)
+                if counter % cartItem.specialtyVariable1 == 0:
+                    difference = (((cartItem.specialtyVariable1 * (cartItem.price - cartItem.markdown)) - cartItem.specialtyVariable2))
+                    self.total += difference
+            elif cartItem.units == 'lb':
+                qualifyingSpecialties = math.floor(cartItem.quantity / (cartItem.specialtyVariable1))
+                self.total -= (qualifyingSpecialties * cartItem.specialtyVariable2)
 
-        if inventoryItem.specialtyType == 'nmatx':
-            spv1 = inventoryItem.specialtyVariable1
-            spv2 = inventoryItem.specialtyVariable2
-            spv3 = inventoryItem.specialtyVariable3
-            if inventoryItem.specialtyType == 'sku':
+        if cartItem.specialtyType == 'nmatx':
+            spv1 = cartItem.specialtyVariable1
+            spv2 = cartItem.specialtyVariable2
+            spv3 = cartItem.specialtyVariable3
+            if cartItem.specialtyType == 'sku':
                 counter = 0
                 for item in self.cart:
-                    if item.name == inventoryItem.name:
+                    if item.name == cartItem.name:
                         counter += 1
-                qualifyingSpecialties = (counter / (spv1 + spv2))
-                self.total += qualifyingSpecialties * ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
-            elif inventoryItem.specialtyType == 'lb':
-                qualifyingSpecialties = math.floor(inventoryItem.quantity / (spv1 + spv2))
-                self.total += qualifyingSpecialties * ((spv2 * (inventoryItem.price - inventoryItem.markdown))*(1-spv3))
+                if counter % (spv1 + spv2) == 0:
+                    qualifyingSpecialties = (counter / (spv1 + spv2))
+                    difference = ((spv2 * (cartItem.price - cartItem.markdown))*(1-spv3))
+                    self.total += difference
+            elif cartItem.specialtyType == 'lb':
+                qualifyingSpecialties = math.floor(cartItem.quantity / (spv1 + spv2))
+                self.total += qualifyingSpecialties * ((spv2 * (cartItem.price - cartItem.markdown)) * (1 - spv3))
 
     def generateItem(self, name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3):
         return InventoryItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)
@@ -212,7 +219,22 @@ class GroceryPOS:
             item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)
             self.inventory.append(item)
 
-
+    def runPOS(self):
+        command = True
+        while command:
+            print(f'Your total is: ${self.total}')
+            command = input('Enter I to see inventory and prices. Enter A to add an item to cart. Enter R to remove an item from cart. Enter Q to quit.')
+            if command.lower() == 'i':
+                self.printInventoryandPrices()
+            elif command.lower() == 'a':
+                answer = input('What would you like to add to your cart?')
+                self.addItemToCart(answer)
+            elif command.lower() == 'r':
+                answer = input('What would you like to remove from your cart')
+                self.removeItemFromCart(answer)
+            elif command.lower() == 'q':
+                command = False
+        print(f'Your final total is ${self.total}. We look forward to seeing you again. :)')
 
 
 class InventoryItem:
@@ -231,6 +253,7 @@ class InventoryItem:
         self.specialtyVariable3 = specialtyVariable3
 
 
-
-
-
+# if __name__ == '__main__':
+#     grocery = GroceryPOS()
+#     grocery.fillInventory()
+#     grocery.runPOS()
