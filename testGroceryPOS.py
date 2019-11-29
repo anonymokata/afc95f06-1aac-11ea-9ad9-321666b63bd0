@@ -224,9 +224,20 @@ class groceryPOSTest(unittest.TestCase):
         self.grocery.addItemToCart('apple')
         self.assertEqual(self.grocery.total, 12)
 
-        # adds 1 more lb of apples to check limit testing
+        # adds 2 more lb of apples to check limit testing
         self.grocery.addItemToCart('apple')
         self.assertEqual(self.grocery.total, 20)
+
+        # removes 1 lb of apples
+        self.grocery.removeItemFromCart('apple')
+        self.assertEqual(self.grocery.total, 0)
+
+        # adds odd number of bogo lbs (5)
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(self.grocery.total, 12)
+
+
+
 
     def testCheckNforX(self):
 

@@ -160,8 +160,13 @@ class GroceryPOS:
                     if counter % cartItem.specialtyVariable1 == 0:
                         self.total += (cartItem.price - cartItem.markdown)
             elif cartItem.units == 'lb':
-                qualifyingSpecialties = math.floor(cartItem.quantity / cartItem.specialtyVariable1)
-                self.total += qualifyingSpecialties * (cartItem.price - cartItem.markdown)
+                if cartItem.quantity <= cartItem.limit:
+                    qualifyingSpecialties = math.floor(cartItem.quantity / cartItem.specialtyVariable1)
+                    self.total += qualifyingSpecialties * (cartItem.price - cartItem.markdown)
+                else:
+                    qualifyingSpecialties = math.floor(cartItem.limit / cartItem.specialtyVariable1)
+                    self.total += qualifyingSpecialties * (cartItem.price - cartItem.markdown)
+
 
         if cartItem.specialtyType == 'nforx':
             if cartItem.units == 'sku':
