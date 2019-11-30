@@ -201,40 +201,40 @@ class groceryPOSTest(unittest.TestCase):
         # self.assertEqual(self.grocery.total, 15)
 
 
-        # this tests when specialty is given to a per pound object it works as well
-        # this particular test is 1
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 4)
-
-        # this particular test is 1
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 4)
-
-        # this tests when more apples are added it still responds appropriately
-        # 1 more pound of apples will be added
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 8)
-
-        # this tests when more apples are added it still responds appropriately
-        # 1 more pound of apples will be added
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 8)
-
-        # tests that 2 lb of apples can be added
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 12)
-
-        # adds 2 more lb of apples to check limit testing
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 20)
-
-        # removes 1 lb of apples
-        self.grocery.removeItemFromCart('apple')
-        self.assertEqual(self.grocery.total, 0)
-
-        # adds odd number of bogo lbs (5)
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 12)
+        # # this tests when specialty is given to a per pound object it works as well
+        # # this particular test is 1
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 4)
+        #
+        # # this particular test is 1
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 4)
+        #
+        # # this tests when more apples are added it still responds appropriately
+        # # 1 more pound of apples will be added
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 8)
+        #
+        # # this tests when more apples are added it still responds appropriately
+        # # 1 more pound of apples will be added
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 8)
+        #
+        # # tests that 2 lb of apples can be added
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 12)
+        #
+        # # adds 2 more lb of apples to check limit testing
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 20)
+        #
+        # # removes 1 lb of apples
+        # self.grocery.removeItemFromCart('apple')
+        # self.assertEqual(self.grocery.total, 0)
+        #
+        # # adds odd number of bogo lbs (5)
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 12)
 
 
 
@@ -322,27 +322,61 @@ class groceryPOSTest(unittest.TestCase):
         # self.grocery.addItemToCart('bacon')
         # self.assertEqual(self.grocery.total, 42)
 
-        # # this tests when specialty is given to a per pound object it works as well
-        # # this particular test is 1
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 3)
-        #
-        # # this tests when more grapes are added it still responds appropriately
-        # # 1 more pounds of grapes will be added
-        # self.grocery.addItemToCart('grape')
-        # print(self.grocery.total)
-        # self.assertEqual(self.grocery.total, 6)
-        #
-        # # 1 more pounds of grapes will be added
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, )
-        #
-        # # this tests when more grapes are added it still responds appropriately
-        # # 3 more pounds of grapes will be added
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, )
+        # this tests when specialty is given to a per pound object it works as well
+        # this test is 1
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 3)
 
+        # this tests when more grapes are added it still responds appropriately
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 6)
 
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 8)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 11)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 14)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 16)
+
+        # # this tests when more grapes are added it still responds appropriately
+        # # 2 more pounds of grapes will be added
+        # self.grocery.addItemToCart('grape')
+        # self.assertEqual(self.grocery.total, 16)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 19)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 22)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 24)
+
+        # 1 more pounds of grapes will be added
+        # this tests the limits
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 27)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 30)
+
+        # 1 more pounds of grapes will be added
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 33)
 
     def testNMatX(self):
 

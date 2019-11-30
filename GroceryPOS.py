@@ -39,7 +39,6 @@ class GroceryPOS:
 
         self.removeFromTotal((cartItem.price - cartItem.markdown) * cartItem.quantity)
 
-
     def addItemToCart(self, name):
 
         if name not in self.listOfItemNamesInCart:
@@ -116,8 +115,8 @@ class GroceryPOS:
                     qualifyingSpecialties = math.floor(inventoryItem.limit / inventoryItem.specialtyVariable1)
                     self.total -= qualifyingSpecialties * (inventoryItem.price - inventoryItem.markdown)
 
-
         if inventoryItem.specialtyType == 'nforx':
+
             if inventoryItem.units == 'sku':
                 counter = 0
                 for item in self.cart:
@@ -128,9 +127,15 @@ class GroceryPOS:
                         self.total -= (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
                         self.total += inventoryItem.specialtyVariable2
             elif inventoryItem.units == 'lb':
-                qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
-                self.total -= (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
-                self.total += qualifyingSpecialties * (inventoryItem.specialtyVariable2)
+                if inventoryItem.quantity <= inventoryItem.limit:
+                    qualifyingSpecialties = math.floor(inventoryItem.quantity / inventoryItem.specialtyVariable1)
+                    if qualifyingSpecialties >= 1:
+                        self.total -= qualifyingSpecialties * (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
+                        self.total += qualifyingSpecialties * (inventoryItem.specialtyVariable2)
+                else:
+                    qualifyingSpecialties = math.floor(inventoryItem.limit / inventoryItem.specialtyVariable1)
+                    self.total -= qualifyingSpecialties * (inventoryItem.specialtyVariable1 * (inventoryItem.price - inventoryItem.markdown))
+                    self.total += qualifyingSpecialties * (inventoryItem.specialtyVariable2)
 
         if inventoryItem.specialtyType == 'nmatx':
             spv1 = inventoryItem.specialtyVariable1
@@ -167,7 +172,6 @@ class GroceryPOS:
                     qualifyingSpecialties = math.floor(cartItem.limit / cartItem.specialtyVariable1)
                     self.total += qualifyingSpecialties * (cartItem.price - cartItem.markdown)
 
-
         if cartItem.specialtyType == 'nforx':
             if cartItem.units == 'sku':
                 counter = 0
@@ -178,8 +182,16 @@ class GroceryPOS:
                     difference = (((cartItem.specialtyVariable1 * (cartItem.price - cartItem.markdown)) - cartItem.specialtyVariable2))
                     self.total += difference
             elif cartItem.units == 'lb':
-                qualifyingSpecialties = math.floor(cartItem.quantity / (cartItem.specialtyVariable1))
-                self.total -= (qualifyingSpecialties * cartItem.specialtyVariable2)
+                if cartItem.quantity <= cartItem.limit:
+                    qualifyingSpecialties = math.floor(cartItem.quantity / cartItem.specialtyVariable1)
+                    if qualifyingSpecialties >= 1:
+                        self.total += qualifyingSpecialties * (cartItem.specialtyVariable1 * (cartItem.price - cartItem.markdown))
+                        self.total -= qualifyingSpecialties * (cartItem.specialtyVariable2)
+                else:
+                    qualifyingSpecialties = math.floor(cartItem.limit / cartItem.specialtyVariable1)
+                    self.total += qualifyingSpecialties * (cartItem.specialtyVariable1 * (cartItem.price - cartItem.markdown))
+                    self.total -= qualifyingSpecialties * (cartItem.specialtyVariable2)
+
 
         if cartItem.specialtyType == 'nmatx':
             spv1 = cartItem.specialtyVariable1
@@ -258,7 +270,4 @@ class InventoryItem:
         self.specialtyVariable3 = specialtyVariable3
 
 
-# if __name__ == '__main__':
-#     grocery = GroceryPOS()
-#     grocery.fillInventory()
-#     grocery.runPOS()
+
