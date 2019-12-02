@@ -2,6 +2,7 @@ import xlrd
 import math
 
 class GroceryPOS:
+
     def __init__(self):
         self.total = 0
         self.inventory = []
@@ -18,7 +19,7 @@ class GroceryPOS:
 
     def printInventoryandPrices(self):
         for item in self.inventory:
-            print(f'{item.name}: {item.price}/{item.units} originally {item.price}')
+            print(f'{item.name}: ${item.markdownPrice}/{item.units}')
 
     def chooseSpecificItemFromCart(self, name):
         for item in self.cart:
@@ -31,7 +32,6 @@ class GroceryPOS:
                 return item
 
     def addSpecificItemToTotal(self, inventoryItem):
-
         units = self.checkUnits(inventoryItem)
         self.addToTotal((inventoryItem.price - inventoryItem.markdown) * units)
 
@@ -221,8 +221,6 @@ class GroceryPOS:
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
 
-        sheet.cell_value(0, 1)
-
         for i in range(sheet.nrows):
             name = sheet.cell_value(i, 1)
             price = sheet.cell_value(i, 2)
@@ -234,8 +232,16 @@ class GroceryPOS:
             specialtyVariable1 = sheet.cell_value(i, 8)
             specialtyVariable2 = sheet.cell_value(i, 9)
             specialtyVariable3 = sheet.cell_value(i, 10)
+
             item = self.generateItem(name, price, units, markdown, hasSpecialty, specialtyType, limit, specialtyVariable1, specialtyVariable2, specialtyVariable3)
             self.inventory.append(item)
+        titleRow = self.inventory[0]
+        self.inventory.remove(titleRow)
+        self.generateMarkdownPrice()
+
+    def generateMarkdownPrice(self):
+        for item in self.inventory:
+            item.markdownPrice = item.price - item.markdown
 
     def runPOS(self):
         command = True
@@ -266,9 +272,14 @@ class InventoryItem:
         self.specialtyType = specialtyType
         self.limit = limit
         self.quantity = 0
+        self.markdownPrice = 0
         self.specialtyVariable1 = specialtyVariable1
         self.specialtyVariable2 = specialtyVariable2
         self.specialtyVariable3 = specialtyVariable3
 
+if __name__ == '__main__':
+    grocery = GroceryPOS()
+    grocery.fillInventory()
+    grocery.runPOS()
 
 
