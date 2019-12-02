@@ -169,6 +169,7 @@ class GroceryPOS:
                 if counter <= cartItem.limit:
                     if counter % spv1 == 0:
                         self.total += cartItem.markdownPrice
+
             elif cartItem.units == 'lb':
                 if cartItem.quantity <= cartItem.limit:
                     qualifyingSpecialties = math.floor(cartItem.quantity / spv1)
@@ -183,9 +184,11 @@ class GroceryPOS:
                 for item in self.cart:
                     if item.name == cartItem.name:
                         counter += 1
-                if counter % spv1 == 0:
-                    difference = (((spv1 * (cartItem.price - cartItem.markdown)) - spv2))
-                    self.total += difference
+                if counter <= cartItem.limit:
+                    if counter % spv1 == 0:
+                        difference = (((spv1 * (cartItem.price - cartItem.markdown)) - spv2))
+                        self.total += difference
+
             elif cartItem.units == 'lb':
                 if cartItem.quantity <= cartItem.limit:
                     qualifyingSpecialties = math.floor(cartItem.quantity / spv1)
