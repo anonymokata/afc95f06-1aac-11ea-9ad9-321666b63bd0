@@ -19,7 +19,10 @@ class GroceryPOS:
 
     def printInventoryandPrices(self):
         for item in self.inventory:
-            print(f'{item.name}: ${item.markdownPrice}/{item.units}')
+            name = item.name
+            markdownPrice = item.markdownPrice
+            units = item.units
+            print('{0}: ${1:.2f}/{2}'.format(name, markdownPrice, units))
 
     def chooseSpecificItemFromCart(self, name):
         for item in self.cart:
@@ -249,7 +252,7 @@ class GroceryPOS:
     def runPOS(self):
         command = True
         while command:
-            print(f'Your total is: ${self.total}')
+            print('Your total is: ${0:.2f}'.format(self.total))
             command = input('Enter I to see inventory and prices. Enter A to add an item to cart. Enter R to remove an item from cart. Enter Q to quit.')
             if command.lower() == 'i':
                 self.printInventoryandPrices()
@@ -261,7 +264,7 @@ class GroceryPOS:
                 self.removeItemFromCart(answer)
             elif command.lower() == 'q':
                 command = False
-        print(f'Your final total is ${self.total}. We look forward to seeing you again. :)')
+        print('Your final total is ${0:.2f}. We look forward to seeing you again. :)'.format(self.total))
 
 
 class InventoryItem:
@@ -275,7 +278,7 @@ class InventoryItem:
         self.specialtyType = specialtyType
         self.limit = limit
         self.quantity = 0
-        self.markdownPrice = 0
+        self.markdownPrice = 0.00
         self.specialtyVariable1 = specialtyVariable1
         self.specialtyVariable2 = specialtyVariable2
         self.specialtyVariable3 = specialtyVariable3
