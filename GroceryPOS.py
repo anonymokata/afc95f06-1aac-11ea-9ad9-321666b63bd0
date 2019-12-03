@@ -22,7 +22,19 @@ class GroceryPOS:
             name = item.name
             markdownPrice = item.markdownPrice
             units = item.units
-            print('{0}: ${1:.2f}/{2}'.format(name, markdownPrice, units))
+            specialtyToString = self.specialtyToString(item)
+            print('{0}: ${1:.2f}/{2} {3}'.format(name, markdownPrice, units, specialtyToString))
+
+    def specialtyToString(self, item):
+
+        if item.specialtyType == 'none':
+            return ''
+        elif item.specialtyType == 'bogo':
+            return 'Specialty: buy 1 get 1 free!'
+        elif item.specialtyType == 'nforx':
+            return 'Specialty: {0} for {1:.2f}!'.format(item.specialtyVariable1, item.specialtyVariable2)
+        elif item.specialtyType == 'nmatx':
+            print('Specialty: not set up yet')
 
     def chooseSpecificItemFromCart(self, name):
         for item in self.cart:
@@ -253,18 +265,24 @@ class GroceryPOS:
         command = True
         while command:
             print('Your total is: ${0:.2f}'.format(self.total))
-            command = input('Enter I to see inventory and prices. Enter A to add an item to cart. Enter R to remove an item from cart. Enter Q to quit.')
+            command = input('Enter I to see inventory and prices.\nEnter A to add an item to cart.\nEnter R to remove an item from cart.\nEnter Q to quit.')
             if command.lower() == 'i':
                 self.printInventoryandPrices()
             elif command.lower() == 'a':
-                answer = input('What would you like to add to your cart?')
-                self.addItemToCart(answer)
+                validItem = False
+                while validItem == False:
+                    answer = input('What would you like to add to your cart?')
+                    for item in self.inventory:
+                        if item.name == answer:
+                            self.addItemToCart(answer)
+                            validItem = True
+
             elif command.lower() == 'r':
                 answer = input('What would you like to remove from your cart')
                 self.removeItemFromCart(answer)
             elif command.lower() == 'q':
                 command = False
-        print('Your final total is ${0:.2f}. We look forward to seeing you again. :)'.format(self.total))
+        print('Your final total is ${0:.2f}. We appreciate your business and we look forward to seeing you again. :)'.format(self.total))
 
 
 class InventoryItem:
