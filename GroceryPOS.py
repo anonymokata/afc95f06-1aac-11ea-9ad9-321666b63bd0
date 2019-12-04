@@ -208,7 +208,7 @@ class GroceryPOS:
                     self.total -= qualifyingSpecialties * (spv2)
 
         if cartItem.specialtyType == 'nmatx':
-            if cartItem.specialtyType == 'sku':
+            if cartItem.units == 'sku':
                 counter = self.calculateCounter(cartItem)
                 if counter <= cartItem.limit:
                     if counter % (spv1 + spv2) == 0:
