@@ -386,131 +386,132 @@ class groceryPOSTest(unittest.TestCase):
 
         print('testNMatX')
 
-        # add 1 milks
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 3)
+        # # add 1 milks
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 3)
+        #
+        # # tests remove 1 milk
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 0)
+        #
+        # # test adds two milks
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 3)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 6)
+        #
+        # # tests remove milk
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 3)
+        #
+        # # tests 2 milks added
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 6)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 7.50)
+        #
+        # # removes 1 milk
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 6)
+        #
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 7.50)
+        #
+        # # tests remove milk
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 6)
+        #
+        # # tests one more milk
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 7.50)
+        #
+        # # tests one more milk
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 10.50)
+        #
+        # # tests one more milk
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 13.50)
+        #
+        # # removes 1 milk
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 10.50)
+        #
+        # # tests one more milk
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 13.50)
+        #
+        # # test one more milk this should be another nmatx
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 15)
+        #
+        # # removes 1 milk
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 13.50)
+        #
+        # # tests one more milk
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 15)
+        #
+        # # this tests the limit of 6
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 18)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 21)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 22.50)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 25.50)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 28.50)
+        # self.grocery.addItemToCart('milk')
+        # self.assertEqual(self.grocery.total, 31.50)
+        #
+        # #this tests removing sku outside of the limit and that the price is correct
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 28.50)
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 25.50)
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 22.50)
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 21)
+        # self.grocery.removeItemFromCart('milk')
+        # self.assertEqual(self.grocery.total, 18)
 
-        # tests remove 1 milk
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 0)
+        # this tests 1 lb of banana
+        # banana is buy 3 get 1 at half 
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 2)
 
-        # test adds two milks
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 3)
-        self.grocery.addItemToCart('milk')
+        # this particular test is 1 Banana
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 4)
+
+        # this particular test is 1 Banana
+        self.grocery.addItemToCart('banana')
         self.assertEqual(self.grocery.total, 6)
 
-        # tests remove milk
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 3)
+        # this test when 1 lb is added this is specialty
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 7)
 
-        # tests 2 milks added
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 6)
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 7.50)
+        # this tests when 1 lb are added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 9)
 
-        # removes 1 milk
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 6)
+        # this tests when 1 lb are added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 11)
 
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 7.50)
+        # this tests when more banana are added
+        # 1 more pounds of banana will be added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 13)
 
-        # tests remove milk
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 6)
-
-        # tests one more milk
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 7.50)
-
-        # tests one more milk
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 10.50)
-
-        # tests one more milk
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 13.50)
-
-        # removes 1 milk
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 10.50)
-
-        # tests one more milk
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 13.50)
-
-        # test one more milk this should be another nmatx
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 15)
-
-        # removes 1 milk
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 13.50)
-
-        # tests one more milk
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 15)
-
-        # this tests the limit of 6
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 18)
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 21)
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 22.50)
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 25.50)
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 28.50)
-        self.grocery.addItemToCart('milk')
-        self.assertEqual(self.grocery.total, 31.50)
-
-        #this tests removing sku outside of the limit and that the price is correct
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 28.50)
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 25.50)
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 22.50)
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 21)
-        self.grocery.removeItemFromCart('milk')
-        self.assertEqual(self.grocery.total, 18)
-
-    #     # this tests 1 lb of banana
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 2)
-    #
-    #     # this particular test is 1 Banana
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 4)
-    #
-    #     # this particular test is 1 Banana
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 6)
-    #
-    #     # this test when 1 lb is added this is specialty
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 7)
-    #
-    #     # this tests when 1 lb are added
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 9)
-    #
-    #     # this tests when 1 lb are added
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 11)
-    #
-    #     # this tests when more banana are added
-    #     # 1 more pounds of banana will be added
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 13)
-    #
-    #     # 1 more pounds of banana will be added
-    #     self.grocery.addItemToCart('Banana')
-    #     self.assertEqual(self.grocery.total, 14)
+        # 1 more pounds of banana will be added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 14)
 
 
 if __name__ == '__main__':
