@@ -480,7 +480,6 @@ class groceryPOSTest(unittest.TestCase):
         # self.assertEqual(self.grocery.total, 18)
 
         # this tests 1 lb of banana
-
         self.grocery.addItemToCart('banana')
         self.assertEqual(self.grocery.total, 3)
 
@@ -531,6 +530,19 @@ class groceryPOSTest(unittest.TestCase):
         # 1 more pounds of banana will be added
         self.grocery.addItemToCart('banana')
         self.assertEqual(self.grocery.total, 34.50)
+
+        # 1 more pounds of banana will be added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 37.50)
+
+        # 1 more pounds of banana will be added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 40.50)
+
+        # 1 more pounds of banana will be added
+        self.grocery.addItemToCart('banana')
+        self.assertEqual(self.grocery.total, 43.50)
+
 
 
 if __name__ == '__main__':
