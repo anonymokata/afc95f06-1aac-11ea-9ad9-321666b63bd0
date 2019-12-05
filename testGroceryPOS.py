@@ -72,22 +72,26 @@ class groceryPOSTest(unittest.TestCase):
     #     self.grocery.addItemToCart('butter')
     #     self.assertEqual(self.grocery.total, 13)
 
-    # def testAddItemToCart(self):
-    #
-    #     print('testAddItemToCart')
-    #     # adds 2 lb of apples
-    #     self.grocery.addItemToCart('apple')
-    #     self.assertEqual(len(self.grocery.cart), 1)
-    #     self.assertEqual(self.grocery.cart[0].name, 'apple')
-    #
-    #     # this tests when another object with pounds is added only one object will remain in the list
-    #     # adds 2 more pounds of apples
-    #     self.grocery.addItemToCart('apple')
-    #     self.assertEqual(len(self.grocery.cart), 1)
-    #     self.assertEqual(self.grocery.total, 8)
-    #
-    #
-    #
+    def testAddItemToCart(self):
+
+        print('testAddItemToCart')
+        # adds 2 lb of apples
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(len(self.grocery.cart), 1)
+        self.assertEqual(self.grocery.cart[0].name, 'apple')
+
+        # this tests when another object with pounds is added only one object will remain in the list
+        # adds 2 more pounds of apples
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(len(self.grocery.cart), 1)
+        self.assertEqual(self.grocery.total, 8)
+
+        # this tests per pounds in fraction of lbs this is .5
+        self.grocery.addItemToCart('strawberry')
+        self.assertEqual(self.grocery.total, 1)
+
+
+
     # def testRemoveItemFromCart(self):
     #
     #     print('testRemoveItemFromCart')
