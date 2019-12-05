@@ -73,9 +73,10 @@ class GroceryPOS:
             cartItem = self.chooseSpecificItemFromCart(name)
             if cartItem.units == 'lb':
                 self.removeSpecialty(cartItem)
+                self.removeSpecificItemFromTotal(cartItem)
                 units = int(input(f'How many pounds of {cartItem.name} would you like to add?'))
                 cartItem.quantity += units
-                self.total += cartItem.markdownPrice * units
+                self.total += cartItem.markdownPrice * cartItem.quantity
                 self.checkSpecialty(cartItem)
             elif cartItem.units == 'sku':
                 self.listOfItemNamesInCart.append(cartItem.name)
@@ -167,7 +168,8 @@ class GroceryPOS:
             elif inventoryItem.units == 'lb':
                 if inventoryItem.quantity <= inventoryItem.limit:
                     if inventoryItem.quantity % (spv1 + spv2) == 0:
-                        self.total -= ((spv2 * inventoryItem.markdownPrice) * spv3)
+                        qualifyingSpecialties = math.floor(inventoryItem.quantity / (spv1 + spv2))
+                        self.total -= qualifyingSpecialties * ((spv2 * inventoryItem.markdownPrice) * spv3)
 
     def removeSpecialty(self, cartItem):
 

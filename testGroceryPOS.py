@@ -479,69 +479,19 @@ class groceryPOSTest(unittest.TestCase):
         # self.grocery.removeItemFromCart('milk')
         # self.assertEqual(self.grocery.total, 18)
 
-        # this tests 1 lb of banana
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 3)
-
-        # this particular test is 1 Banana
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 6)
-
-        # this particular test is 1 Banana
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 9)
-
-        # this test when 1 lb is added this is specialty
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 10.50)
-
-        # this tests when 1 lb are added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 13.50)
-
-        # this tests when 1 lb are added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 16.50)
-
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 19.50)
-
-        # 1 more pounds of banana will be added
+        # this tests 8 lb of banana
         self.grocery.addItemToCart('banana')
         self.assertEqual(self.grocery.total, 21)
 
-        # 1 more pounds of banana will be added
+        # this particular test is 1 Banana
         self.grocery.addItemToCart('banana')
         self.assertEqual(self.grocery.total, 24)
 
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 27)
-
-        # 1 more pounds of banana will be added
+        # this particular test is 2 Banana
         self.grocery.addItemToCart('banana')
         self.assertEqual(self.grocery.total, 30)
 
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 31.50)
 
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 34.50)
-
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 37.50)
-
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 40.50)
-
-        # 1 more pounds of banana will be added
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 43.50)
 
 
 
