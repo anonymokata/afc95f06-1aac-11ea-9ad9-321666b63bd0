@@ -88,7 +88,12 @@ class groceryPOSTest(unittest.TestCase):
 
         # this tests per pounds in fraction of lbs this is .5
         self.grocery.addItemToCart('strawberry')
-        self.assertEqual(self.grocery.total, 1)
+        self.assertEqual(self.grocery.total, 9)
+
+        #this tests per pounds in fraction addition this adds .5
+        self.grocery.addItemToCart('strawberry')
+        self.assertEqual(self.grocery.total, 10)
+
 
 
 
@@ -195,18 +200,18 @@ class groceryPOSTest(unittest.TestCase):
         # self.assertEqual(self.grocery.total, 6)
         # self.grocery.removeItemFromCart('butter')
         # self.assertEqual(self.grocery.total, 6)
-
-        # this tests 3 lb of apple
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 8)
-
-        # this particular test is 1 apple
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 8)
-
-        # this particular test is 3 apple
-        self.grocery.addItemToCart('grape')
-        self.assertEqual(self.grocery.total, 16)
+        #
+        # # this tests 3 lb of apple
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 8)
+        #
+        # # this particular test is 1 apple
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 8)
+        #
+        # # this particular test is 3 apple
+        # self.grocery.addItemToCart('grape')
+        # self.assertEqual(self.grocery.total, 16)
 
 
 
