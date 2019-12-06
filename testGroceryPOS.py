@@ -201,17 +201,17 @@ class groceryPOSTest(unittest.TestCase):
         # self.grocery.removeItemFromCart('butter')
         # self.assertEqual(self.grocery.total, 6)
         #
-        # this tests 3 lb of apple
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 8)
-
-        # this particular test is 1.7 lb apple
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 10.80)
-
-        # this particular test is 2.7 lb apple and outside of the limit
-        self.grocery.addItemToCart('apple')
-        self.assertEqual(self.grocery.total, 17.60)
+        # # this tests 3 lb of apple
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 8)
+        #
+        # # this particular test is 1.7 lb apple
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 10.80)
+        #
+        # # this particular test is 2.7 lb apple and outside of the limit
+        # self.grocery.addItemToCart('apple')
+        # self.assertEqual(self.grocery.total, 17.60)
 
 
 
@@ -310,17 +310,17 @@ class groceryPOSTest(unittest.TestCase):
         # self.grocery.removeItemFromCart('bacon')
         # self.assertEqual(self.grocery.total, 24)
 
-        # # this tests 8 lb of grapes
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 22)
-        #
-        # # this particular test is 1 grapes
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 24)
-        #
-        # # this particular test is 2 grapes
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 30)
+        # this tests 3.7 lb of grapes
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 10.10)
+
+        # this particular test is 1.1 grapes
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 13.40)
+
+        # this particular test is 5 grapes
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 26.40)
 
 
 
