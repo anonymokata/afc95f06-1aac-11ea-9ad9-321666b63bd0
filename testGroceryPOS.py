@@ -200,18 +200,18 @@ class groceryPOSTest(unittest.TestCase):
         # self.assertEqual(self.grocery.total, 6)
         # self.grocery.removeItemFromCart('butter')
         # self.assertEqual(self.grocery.total, 6)
-        #
-        # # this tests 3 lb of apple
-        # self.grocery.addItemToCart('apple')
-        # self.assertEqual(self.grocery.total, 8)
-        #
-        # # this particular test is 1.7 lb apple
-        # self.grocery.addItemToCart('apple')
-        # self.assertEqual(self.grocery.total, 10.80)
-        #
-        # # this particular test is 2.7 lb apple and outside of the limit
-        # self.grocery.addItemToCart('apple')
-        # self.assertEqual(self.grocery.total, 17.60)
+
+        # this tests 3 lb of apple
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(self.grocery.total, 8)
+
+        # this particular test is 1.7 lb apple
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(self.grocery.total, 10.80)
+
+        # this particular test is 2.3 lb apple and outside of the limit
+        self.grocery.addItemToCart('apple')
+        self.assertEqual(self.grocery.total, 16)
 
 
 
