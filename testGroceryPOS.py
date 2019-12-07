@@ -310,17 +310,17 @@ class groceryPOSTest(unittest.TestCase):
         # self.grocery.removeItemFromCart('bacon')
         # self.assertEqual(self.grocery.total, 24)
 
-        # # this tests 3.7 lb of grapes
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 10.10)
-        #
-        # # this particular test is 1.1 grapes
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 13.40)
-        #
-        # # this particular test is 5 grapes
-        # self.grocery.addItemToCart('grape')
-        # self.assertEqual(self.grocery.total, 26.40)
+        # this tests 3.7 lb of grapes
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 10.10)
+
+        # this particular test is 2.3 grapes
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 16)
+
+        # this particular test is 3.8 grapes
+        self.grocery.addItemToCart('grape')
+        self.assertEqual(self.grocery.total, 26.40)
 
 
 
@@ -421,25 +421,25 @@ class groceryPOSTest(unittest.TestCase):
         # self.grocery.removeItemFromCart('milk')
         # self.assertEqual(self.grocery.total, 18)
 
-        # this tests 2.2 lb of banana
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 6.6000000000000005)
-
-        # this particular test is 3.7 Banana # didn't use specialty
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 16.200000000000003)
-
-        # this particular test is 2.1 Banana
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 21.00)
-
-        # ## this particular test is 4.4 Banana
+        # # this tests 2.2 lb of banana
         # self.grocery.addItemToCart('banana')
-        # self.assertEqual(self.grocery.total, 32.70)
-
-        ## this particular test is 4 Banana
-        self.grocery.addItemToCart('banana')
-        self.assertEqual(self.grocery.total, 31.50)
+        # self.assertEqual(self.grocery.total, 6.6000000000000005)
+        #
+        # # this particular test is 3.7 Banana # didn't use specialty
+        # self.grocery.addItemToCart('banana')
+        # self.assertEqual(self.grocery.total, 16.200000000000003)
+        #
+        # # this particular test is 2.1 Banana
+        # self.grocery.addItemToCart('banana')
+        # self.assertEqual(self.grocery.total, 21.00)
+        #
+        # # ## this particular test is 4.4 Banana
+        # # self.grocery.addItemToCart('banana')
+        # # self.assertEqual(self.grocery.total, 32.70)
+        #
+        # ## this particular test is 4 Banana
+        # self.grocery.addItemToCart('banana')
+        # self.assertEqual(self.grocery.total, 31.50)
 
 
 
