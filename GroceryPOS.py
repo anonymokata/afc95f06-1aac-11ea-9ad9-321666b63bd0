@@ -171,6 +171,7 @@ class GroceryPOS:
                         qualifyingSpecialties = math.floor(inventoryItem.quantity / (spv1 + spv2))
                         self.total -= qualifyingSpecialties * ((spv2 * inventoryItem.markdownPrice) * spv3)
 
+
     def removeSpecialty(self, cartItem):
 
         spv1 = cartItem.specialtyVariable1
