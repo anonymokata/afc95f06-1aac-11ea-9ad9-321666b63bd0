@@ -16,6 +16,7 @@ Cons
 3.	Specialty Variables while functional can be confusing at times. While the specialty variables are functional they can get confusing at times.
 4.	Naming/entering names is sensitive with likely many items that are hard to spell. When adding items to the cart it can get touchy especially since I took the naming route of NO PLURALS. So adding grape instead of grapes.
 5.	The decimals in the specialty cases. There are some unique cases when adding decimals of lb objects where the price carries out to some odd decimal place. Right now this is no problem as it doesn’t affect the price output or price to two decimals, but could be an issue down the road.
+
 Future Ideas
 1.	Expiration dates on excel. Adding expiration dates to specialties and markdowns would be a cool feature.
 2.	Fuelsaver. Adding a fuelsaver attribute to each item that counts how much fuelsaver you’re getting. 
