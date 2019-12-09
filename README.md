@@ -9,6 +9,7 @@ Pros
 1. Specialties are Dynamic. Adding more specialties to the system will be easy as the specialty is all called and checked in one spot. 
 2.	Item lists are populated easily.
 3.	Excel file is uniform/quick/easy to use. With the excel file employees of said grocery store will be able to easily make changes on their end without any hassle. The excel file is uniform, quick, and easy to use. Making the inventory data concise and readable.
+
 Cons
 1.	Must entirely remove lb objects instead of subtracting. All lb objects if you were to over-ring how many pounds you wanted must be entirely removed and then the correct amount added back in.
 2.	Limits must be manually calculated right now. Since my program functions on limits and specialty variables a limit of 3 in a buy 3 for 10 situation actually means the limit in the cart is 9 and all of that must be manually calculated right now. 
