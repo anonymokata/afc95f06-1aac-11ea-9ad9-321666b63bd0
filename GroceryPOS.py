@@ -18,6 +18,7 @@ class GroceryPOS:
         self.total -= item
 
     def printInventoryandPrices(self):
+
         for item in self.inventory:
             name = item.name
             markdownPrice = item.markdownPrice
@@ -26,6 +27,7 @@ class GroceryPOS:
             print('{0}: ${1:.2f}/{2} {3}'.format(name, markdownPrice, units, specialtyToString))
 
     def calculateCounter(self, inventoryItem):
+
         counter = 0
         for item in self.cart:
             if item.name == inventoryItem.name:
@@ -44,16 +46,19 @@ class GroceryPOS:
             print('Specialty: not set up yet')
 
     def chooseSpecificItemFromCart(self, name):
+
         for item in self.cart:
             if item.name == name:
                 return item
 
     def chooseSpecificItemFromInventory(self, name):
+
         for item in self.inventory:
             if item.name == name:
                 return item
 
     def addSpecificItemToTotal(self, inventoryItem):
+
         units = self.checkUnits(inventoryItem)
         self.addToTotal(inventoryItem.markdownPrice * units)
 
@@ -85,6 +90,7 @@ class GroceryPOS:
                 self.checkSpecialty(cartItem)
 
     def removeItemFromCart(self, name):
+
         if len(self.cart) == 0:
             print('There are no items in your cart')
         elif name not in self.listOfItemNamesInCart:
@@ -172,7 +178,6 @@ class GroceryPOS:
                 else:
                     qualifyingSpecialties = math.floor(inventoryItem.limit / (spv1 + spv2))
                     self.total -= qualifyingSpecialties * ((spv2 * inventoryItem.markdownPrice) * (1 - spv3))
-
 
     def removeSpecialty(self, cartItem):
 
